@@ -46,7 +46,7 @@ export class LeakInvestigator {
   }
 
   private convByteToMega(byte: number): number {
-    return (byte / (1024 * 1024)).toFixed(1);
+    return parseFloat((byte / (1024 * 1024)).toFixed(1));
   }
 }
 
