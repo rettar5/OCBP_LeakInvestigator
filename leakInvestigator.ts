@@ -1,7 +1,7 @@
 import { Log } from "../../../odnUtils";
 import { AccountConfigs, AccountData } from "../../../configs/accountConfigs";
 import { OdnTweets } from "../../../odnTweets";
-declare let os;
+const os = require('os');
 
 export class LeakInvestigator {
   constructor(private accountData: AccountData, private nowDate: Date, private fullName: string) {}
@@ -14,9 +14,9 @@ export class LeakInvestigator {
   run(finish: (isProcessed?: boolean) => void) {
     const heapUsed = process.memoryUsage().heapUsed;
     let text = '@subSC13 ODN-CLIENT サーバステータス\n';
-    text += 'TotalMem: ' + this.convByteToMega(os.totalmem()) + '\n';
-    text += 'FreeMem: ' + this.convByteToMega(os.freemem()) + '\n';
-    text += 'ProcessMem: ' + this.convByteToMega(heapUsed) + '\n';
+    text += 'TotalMem: ' + this.convByteToMega(os.totalmem()) + 'MB\n';
+    text += 'FreeMem: ' + this.convByteToMega(os.freemem()) + 'MB\n';
+    text += 'ProcessMem: ' + this.convByteToMega(heapUsed) + 'MB\n';
     Log.i(text);
 
     if (this.isValidTweetTime(this.nowDate)) {
