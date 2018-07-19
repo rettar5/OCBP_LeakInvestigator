@@ -12,7 +12,7 @@ export class LeakInvestigator {
   run(finish: (isProcessed?: boolean) => void) {
     const heapUsed = process.memoryUsage().heapUsed;
     const heapUsedMB = heapUsed / (1024 * 1024);
-    Log.i('LeakInvestigator heap used: ' + heapUsed + 'byte, ' + heapUsedMB + 'MB');
+    Log.i('LeakInvestigator heap used: ' + heapUsed + 'byte, ' + heapUsedMB.toFixed(1) + 'MB');
     finish();
   }
 
