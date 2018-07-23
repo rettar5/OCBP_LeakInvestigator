@@ -14,6 +14,13 @@ export class LeakInvestigator {
    * @param {(isProcessed?: boolean) => void} finish
    */
   run(finish: (isProcessed?: boolean) => void) {
+    try {
+        global.gc();
+    } catch(error) {
+        Log.i("You must run program with 'node --expose-gc index.js' or 'npm start'");
+        Log.t("gc error: ", error);
+    }
+
     const heapUsed = process.memoryUsage().heapUsed;
     const profile = TwitterProfileConfigs.getProfile(this.accountData.userId);
     let text = '@' + profile.screenName + ' ODN-CLIENT サーバステータス\n';
